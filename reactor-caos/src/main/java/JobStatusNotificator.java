@@ -7,12 +7,8 @@ public class JobStatusNotificator {
 
     public JobStatusNotificator() {
         notifications = Flux.create(emitter -> {
-            this.registerListener(emitter::next);
+            jobNotifierListener = t -> emitter.next(t);
         });
-    }
-
-    public void registerListener(JobStatusListener jobNotifierListener) {
-        this.jobNotifierListener = jobNotifierListener;
     }
 
     public void notify(String value) {
